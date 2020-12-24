@@ -135,7 +135,7 @@ if key == "]] .. key .. [[" then
 	gpu.set(1, 2, "Please reboot your computer.")
 else
 	error("Wrong key!", 0)
-end]])
+]])
 
 gpu.setBackground(0x000000)
 gpu.setForeground(0xFFFFFF)
