@@ -6,10 +6,6 @@ response = inet.request("https://raw.githubusercontent.com/GeorgNation/Wishmaste
 body = ""
 chunk = ""
 
-for chunk in response do
-  body = body .. chunk
-end
-
-eeprom.set(body)
+eeprom.set(response)
 
 os.shutdown(0)
