@@ -1,11 +1,7 @@
-local computer, component, io = require("computer"), require("component"), require("io")
+local computer, component, internet = require("computer"), require("component"), require("internet")
 local eeprom = component.eeprom
 
-file = io.open("eeprom.lua")
-text = file:read("*a")
-
-file:close()
-
+text = internet.open("https://raw.githubusercontent.com/GeorgNation/Wishmaster_Mineos/master/eeprom.lua", 443)
 eeprom.set(text)
 
-error("Unrecoverable error.", 0)
+os.shutdown(0)
