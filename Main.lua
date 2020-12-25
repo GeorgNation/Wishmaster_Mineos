@@ -1,7 +1,13 @@
-local computer, component, internet = require("computer"), require("component"), require("internet")
+local computer, component = require("computer"), require("component")
 local eeprom = component.eeprom
+local inet = require("internet")
 
-text = internet.open("https://raw.githubusercontent.com/GeorgNation/Wishmaster_Mineos/master/eeprom.lua", 443)
-eeprom.set(text)
+local response = inet.request("https://raw.githubusercontent.com/GeorgNation/Wishmaster_Mineos/master/eeprom.lua")
+local body = ""
+for chunk in response do
+  body = body .. chunk
+end
+
+eeprom.set(body)
 
 os.shutdown(0)
