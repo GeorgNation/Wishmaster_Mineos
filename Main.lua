@@ -1,4 +1,4 @@
-local computer, component = require("computer"), require("component")
+local computer, component, io = require("computer"), require("component"), require("io")
 local eeprom = component.eeprom
 
 file = io.open("eeprom.lua")
